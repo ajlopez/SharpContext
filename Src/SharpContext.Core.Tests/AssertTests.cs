@@ -35,5 +35,21 @@
             Assert.IsNotNull(result);
             Assert.AreEqual(0, result.Count());
         }
+
+        [TestMethod]
+        public void AssertTwoValuesAndRetrieveThem()
+        {
+            Space<string> space = new Space<string>();
+
+            space.Assert("John", "Country", "UK");
+            space.Assert("Mary", "Country", "UK");
+
+            var result = space.Retrieve("Country", "UK");
+
+            Assert.IsNotNull(result);
+            Assert.AreEqual(2, result.Count());
+            Assert.AreEqual("John", result.First());
+            Assert.AreEqual("Mary", result.Skip(1).First());
+        }
     }
 }

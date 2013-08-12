@@ -7,14 +7,14 @@
 
     public class Space<T>
     {
-        private IDictionary<string, T> values = new Dictionary<string, T>();
+        private IDictionary<string, IList<T>> values = new Dictionary<string, IList<T>>();
 
         public IEnumerable<T> Retrieve(params object[] args)
         {
             string key = ContextToString(args);
 
             if (this.values.ContainsKey(key))
-                return new List<T>() { this.values[key] };
+                return this.values[key];
 
             return new List<T>();
         }
@@ -22,7 +22,11 @@
         public void Assert(T data, params object[] args)
         {
             string key = ContextToString(args);
-            this.values[key] = data;
+
+            if (!this.values.ContainsKey(key))
+                this.values[key] = new List<T>();
+
+            this.values[key].Add(data);
         }
 
         private static string ContextToString(object[] args)
