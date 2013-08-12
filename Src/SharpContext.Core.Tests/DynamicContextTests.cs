@@ -16,5 +16,23 @@
 
             Assert.IsNull(context.GetValue("Country"));
         }
+        
+        [TestMethod]
+        public void CreateWithKeyValue()
+        {
+            DynamicContext context = new DynamicContext("Country", "Japan");
+
+            Assert.AreEqual("Japan", context.GetValue("Country"));
+        }
+
+        [TestMethod]
+        public void CreateWithTwoKeyValue()
+        {
+            DynamicContext context = new DynamicContext("Country", "Japan", "Category", "Beverages");
+
+            Assert.AreEqual("Japan", context.GetValue("Country"));
+            Assert.AreEqual("Beverages", context.GetValue("Category"));
+            Assert.IsNull(context.GetValue("Unknown"));
+        }
     }
 }
