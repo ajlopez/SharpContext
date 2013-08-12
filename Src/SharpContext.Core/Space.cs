@@ -31,13 +31,16 @@
 
         private static string ContextToString(object[] args)
         {
+            var words = args.Select(arg => arg.ToString()).ToArray();
+            Array.Sort(words);
+
             string result = string.Empty;
 
-            foreach (var arg in args)
+            foreach (var word in words)
             {
                 if (!string.IsNullOrWhiteSpace(result))
                     result += '|';
-                result += arg.ToString();
+                result += word;
             }
 
             return result;

@@ -19,5 +19,18 @@
             Assert.IsNotNull(result);
             Assert.AreEqual(0, result.Count());
         }
+
+        [TestMethod]
+        public void AssertAndRetrieveInDifferentOrder()
+        {
+            Space<string> space = new Space<string>();
+
+            space.Assert("John", "Country", "UK", "Category", "Beverages");
+            var result = space.Retrieve("Category", "Beverages", "Country", "UK");
+
+            Assert.IsNotNull(result);
+            Assert.AreEqual(1, result.Count());
+            Assert.AreEqual("John", result.First());
+        }
     }
 }
