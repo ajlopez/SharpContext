@@ -46,6 +46,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AssertTests.cs" />
+    <Compile Include="DynamicContextTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RetrieveTests.cs" />
   </ItemGroup>
