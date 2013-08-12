@@ -22,5 +22,18 @@
             Assert.AreEqual(1, result.Count());
             Assert.AreEqual("John", result.First());
         }
+
+        [TestMethod]
+        public void AssertAndRetrieveOtherContext()
+        {
+            Space<string> space = new Space<string>();
+
+            space.Assert("John", "Country", "UK");
+
+            var result = space.Retrieve("Country", "Japan");
+
+            Assert.IsNotNull(result);
+            Assert.AreEqual(0, result.Count());
+        }
     }
 }
