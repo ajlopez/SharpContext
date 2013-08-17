@@ -16,7 +16,14 @@
 
             for (int k = 0; k < args.Length; k += 2)
             {
+                if (!(args[k] is string))
+                    throw new InvalidOperationException("Property name should be an string");
+
                 string key = (string)args[k];
+
+                if (args[k + 1] == null)
+                    throw new InvalidOperationException("Value cannot be null");
+
                 object value = args[k + 1];
 
                 this.values[key] = value;

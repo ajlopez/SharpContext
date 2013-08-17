@@ -49,5 +49,50 @@
                 Assert.AreEqual("Odd number of arguments", ex.Message);
             }
         }
+
+        [TestMethod]
+        public void PropertyNameIsNotAnString()
+        {
+            try
+            {
+                new DynamicContext(1, "One");
+                Assert.Fail();
+            }
+            catch (Exception ex)
+            {
+                Assert.IsInstanceOfType(ex, typeof(InvalidOperationException));
+                Assert.AreEqual("Property name should be an string", ex.Message);
+            }
+        }
+
+        [TestMethod]
+        public void PropertyNameIsNull()
+        {
+            try
+            {
+                new DynamicContext("One", 1, null, 2);
+                Assert.Fail();
+            }
+            catch (Exception ex)
+            {
+                Assert.IsInstanceOfType(ex, typeof(InvalidOperationException));
+                Assert.AreEqual("Property name should be an string", ex.Message);
+            }
+        }
+
+        [TestMethod]
+        public void ValueIsNull()
+        {
+            try
+            {
+                new DynamicContext("One", 1, "Two", null, "Three", 3);
+                Assert.Fail();
+            }
+            catch (Exception ex)
+            {
+                Assert.IsInstanceOfType(ex, typeof(InvalidOperationException));
+                Assert.AreEqual("Value cannot be null", ex.Message);
+            }
+        }
     }
 }
