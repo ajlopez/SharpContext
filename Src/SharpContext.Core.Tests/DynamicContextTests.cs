@@ -34,5 +34,20 @@
             Assert.AreEqual("Beverages", context.GetValue("Category"));
             Assert.IsNull(context.GetValue("Unknown"));
         }
+
+        [TestMethod]
+        public void OddNumberOfArguments()
+        {
+            try
+            {
+                new DynamicContext("One", "Two", "Three");
+                Assert.Fail();
+            }
+            catch (Exception ex)
+            {
+                Assert.IsInstanceOfType(ex, typeof(InvalidOperationException));
+                Assert.AreEqual("Odd number of arguments", ex.Message);
+            }
+        }
     }
 }

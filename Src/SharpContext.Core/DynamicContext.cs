@@ -11,6 +11,9 @@
 
         public DynamicContext(params object[] args)
         {
+            if (args.Length % 2 == 1)
+                throw new InvalidOperationException("Odd number of arguments");
+
             for (int k = 0; k < args.Length; k += 2)
             {
                 string key = (string)args[k];
