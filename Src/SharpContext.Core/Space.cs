@@ -9,9 +9,9 @@
     {
         private IDictionary<string, IList<T>> values = new Dictionary<string, IList<T>>();
 
-        public IEnumerable<T> Retrieve(params object[] args)
+        public IEnumerable<T> Retrieve(DynamicContext context)
         {
-            string key = ContextToString(args);
+            string key = context.AsString();
 
             if (this.values.ContainsKey(key))
                 return this.values[key];
@@ -19,31 +19,14 @@
             return new List<T>();
         }
 
-        public void Assert(T data, params object[] args)
+        public void Assert(T data, DynamicContext context)
         {
-            string key = ContextToString(args);
+            string key = context.AsString();
 
             if (!this.values.ContainsKey(key))
                 this.values[key] = new List<T>();
 
             this.values[key].Add(data);
-        }
-
-        private static string ContextToString(object[] args)
-        {
-            var words = args.Select(arg => arg.ToString()).ToArray();
-            Array.Sort(words);
-
-            string result = string.Empty;
-
-            foreach (var word in words)
-            {
-                if (!string.IsNullOrWhiteSpace(result))
-                    result += '|';
-                result += word;
-            }
-
-            return result;
         }
     }
 }

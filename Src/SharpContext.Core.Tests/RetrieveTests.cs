@@ -14,7 +14,7 @@
         {
             Space<string> space = new Space<string>();
 
-            var result = space.Retrieve("Country", "UK");
+            var result = space.Retrieve(new DynamicContext("Country", "UK"));
 
             Assert.IsNotNull(result);
             Assert.AreEqual(0, result.Count());
@@ -25,8 +25,8 @@
         {
             Space<string> space = new Space<string>();
 
-            space.Assert("John", "Country", "UK", "Category", "Beverages");
-            var result = space.Retrieve("Category", "Beverages", "Country", "UK");
+            space.Assert("John", new DynamicContext("Country", "UK", "Category", "Beverages"));
+            var result = space.Retrieve(new DynamicContext("Category", "Beverages", "Country", "UK"));
 
             Assert.IsNotNull(result);
             Assert.AreEqual(1, result.Count());
