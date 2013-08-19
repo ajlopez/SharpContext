@@ -36,6 +36,14 @@
         }
 
         [TestMethod]
+        public void AsString()
+        {
+            DynamicContext context = new DynamicContext("Country", "Japan", "Category", "Beverages", "Amount", 1000);
+
+            Assert.AreEqual("Amount=1000|Category=Beverages|Country=Japan", context.AsString());
+        }
+
+        [TestMethod]
         public void OddNumberOfArguments()
         {
             try

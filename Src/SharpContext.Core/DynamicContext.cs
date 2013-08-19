@@ -37,5 +37,25 @@
 
             return null;
         }
+
+        public string AsString()
+        {
+            var names = this.values.Keys.ToArray();
+            Array.Sort(names);
+
+            string result = string.Empty;
+
+            foreach (var name in names)
+            {
+                if (!string.IsNullOrWhiteSpace(result))
+                    result += "|";
+
+                result += name;
+                result += "=";
+                result += this.values[name].ToString();
+            }
+
+            return result;
+        }
     }
 }
